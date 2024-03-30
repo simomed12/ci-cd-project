@@ -19,7 +19,14 @@ pipeline {
                     url: 'https://github.com/simomed12/ci-cd-project.git'
             }
         }
-
+        stage('Build Application ') {
+            steps {
+                sh " mvn clean package"
+            }
+        }
+        stage('Test Appliation') {
+            steps {
+                sh" test "
     }
 }
 
