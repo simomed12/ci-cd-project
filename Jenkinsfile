@@ -1,24 +1,26 @@
-pipeline {
+pipeline{
+
     agent any 
     tools {
         jdk 'Java17'
         maven 'Maven3'
     }
-    stages {
+    stages{
         
-        stage('Cleanup Workspace') {
+        stage("Cleanup Workspace"){
             steps {
                 cleanWs()
             }
+
         }
     
-        stage('Checkout from SCM') {
+        stage("Checkout from SCM"){
             steps {
-                git branch: 'main', 
-                    credentialsId: 'github', 
-                    url: 'https://github.com/simomed12/ci-cd-project.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/simomed12/ci-cd-project.git'
             }
+
         }
+         
         stage('Build Application ') {
             steps {
                 sh " mvn clean package"
@@ -26,7 +28,11 @@ pipeline {
         }
         stage('Test Appliation') {
             steps {
-                sh" test "
-    }
-}
+                sh " mvn test "
+            }
+        }
+        
 
+    }
+
+}
